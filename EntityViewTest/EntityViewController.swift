@@ -45,6 +45,8 @@ class EntityViewController: UIViewController {
     
     private lazy var pageController: UIPageViewController = {
         let controller = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        controller.dataSource = self
+        controller.delegate = self
         return controller
     }()
     
@@ -52,14 +54,10 @@ class EntityViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-
-        add(tabController, into: tabContainerView)
         
         pageController.setViewControllers([contentControllers[0]], direction: .forward, animated: false, completion: nil)
-        pageController.dataSource = self
-        pageController.delegate = self
-        
-        //show(content: pageController)
+
+        add(tabController, into: tabContainerView)
         add(pageController, into: contentContainerView)
     }
     
