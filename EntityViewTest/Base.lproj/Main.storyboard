@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Entity View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="EntityViewController" customModule="EntityViewTest" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uuQ-8Z-FFD" userLabel="Tab Container">
+                                <rect key="frame" x="0.0" y="108" width="414" height="48"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="F8a-UR-Fqv"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQ5-Si-kFs" userLabel="Content Container">
+                                <rect key="frame" x="0.0" y="156" width="414" height="706"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="aQ5-Si-kFs" secondAttribute="bottom" id="3Zd-0X-Pub"/>
+                            <constraint firstItem="aQ5-Si-kFs" firstAttribute="top" secondItem="uuQ-8Z-FFD" secondAttribute="bottom" id="DLs-bP-keb"/>
+                            <constraint firstItem="aQ5-Si-kFs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="MZc-oS-3eD"/>
+                            <constraint firstItem="uuQ-8Z-FFD" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Oho-hH-hJF"/>
+                            <constraint firstItem="uuQ-8Z-FFD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="64" id="TOz-Ij-Tho"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="aQ5-Si-kFs" secondAttribute="trailing" id="iao-E2-Ixy"/>
+                            <constraint firstItem="uuQ-8Z-FFD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="k9y-vN-PiV"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="contentContainerView" destination="aQ5-Si-kFs" id="a3a-db-d1Q"/>
+                        <outlet property="tabContainerView" destination="uuQ-8Z-FFD" id="5ZM-IF-VXI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="18.840579710144929" y="97.767857142857139"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
