@@ -24,7 +24,11 @@ struct EntityView: View {
     }
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
+            Rectangle() // screen header
+                .fill(Color.white)
+                .frame(height: 64)
+            
             TabbedMenuView(viewModel: tabbedMenuViewModel)
                 .frame(height: 48)
 
