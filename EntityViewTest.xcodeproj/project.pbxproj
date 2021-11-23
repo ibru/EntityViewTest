@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A17E174274CC58B0022FF5E /* EntityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A17E173274CC58B0022FF5E /* EntityViewModel.swift */; };
 		8A2B75E4274848C400D20FA0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2B75E3274848C400D20FA0 /* AppDelegate.swift */; };
 		8A2B75E6274848C400D20FA0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2B75E5274848C400D20FA0 /* SceneDelegate.swift */; };
 		8A2B75E8274848C400D20FA0 /* EntityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2B75E7274848C400D20FA0 /* EntityViewController.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8A17E173274CC58B0022FF5E /* EntityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityViewModel.swift; sourceTree = "<group>"; };
 		8A2B75E0274848C400D20FA0 /* EntityViewTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EntityViewTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A2B75E3274848C400D20FA0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A2B75E5274848C400D20FA0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				8A2B75E3274848C400D20FA0 /* AppDelegate.swift */,
 				8A2B75E5274848C400D20FA0 /* SceneDelegate.swift */,
 				8A2B75E7274848C400D20FA0 /* EntityViewController.swift */,
+				8A17E173274CC58B0022FF5E /* EntityViewModel.swift */,
 				8A2B75E9274848C400D20FA0 /* Main.storyboard */,
 				8A2B75EC274848C500D20FA0 /* Assets.xcassets */,
 				8A2B75EE274848C500D20FA0 /* LaunchScreen.storyboard */,
@@ -273,6 +276,7 @@
 				8A2B75E8274848C400D20FA0 /* EntityViewController.swift in Sources */,
 				8A2B75E4274848C400D20FA0 /* AppDelegate.swift in Sources */,
 				8A2B75E6274848C400D20FA0 /* SceneDelegate.swift in Sources */,
+				8A17E174274CC58B0022FF5E /* EntityViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

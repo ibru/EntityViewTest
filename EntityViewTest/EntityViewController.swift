@@ -7,22 +7,28 @@
 
 import UIKit
 import SwiftUI
+import Combine
 
 class EntityViewController: UIViewController {
 
     @IBOutlet weak var tabContainerView: UIView!
     @IBOutlet weak var contentContainerView: UIView!
     
+    var viewModel: EntityViewModel!
+    
     private lazy var tabbedMenuViewModel: TabbedMenuViewModel = {
         .init(
-            itemViewModels: [
-                .init(title: "Work Template", isSelected: true, selection: { self.show(content: self.contentControllers[0]) }),
-                .init(title: "Fields", selection: { self.show(content: self.contentControllers[1]) }),
-                .init(title: "Attachments", selection: { self.show(content: self.contentControllers[2]) }),
-                .init(title: "Subtasks", selection: { self.show(content: self.contentControllers[3]) })
-            ]
+            itemViewModels: viewModel.contentItems.map { contentItem in
+                    .init(
+                        title: contentItem.title,
+                        isSelected: contentItem.id == viewModel.selectedItem?.id,
+                        selection: { self.viewModel.show(content: contentItem) }
+                    )
+            }
         )
     }()
+    
+    private var cancellables: Set<AnyCancellable> = []
     
     private lazy var tabController: UIViewController = {
         UIHostingController(
@@ -36,12 +42,7 @@ class EntityViewController: UIViewController {
         )
     }()
     
-    private lazy var contentControllers: [UIViewController] = [
-        ContentViewController(title: "My Work Template", color: .gray),
-        ContentViewController(title: "Fields", color: .blue),
-        ContentViewController(title: "Attachments", color: .purple),
-        ContentViewController(title: "Subtasks", color: .magenta)
-    ]
+    private var contentControllers: [UIViewController] = []
     
     private lazy var pageController: UIPageViewController = {
         let controller = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
@@ -55,13 +56,28 @@ class EntityViewController: UIViewController {
         
         view.backgroundColor = .white
         
-        pageController.setViewControllers([contentControllers[0]], direction: .forward, animated: false, completion: nil)
+        if let initialySelectedController = viewModel.selectedItem?.viewController {
+            pageController.setViewControllers([initialySelectedController()], direction: .forward, animated: false, completion: nil)
+        }
 
         add(tabController, into: tabContainerView)
         add(pageController, into: contentContainerView)
+        
+        viewModel.$selectedItem
+            .sink { [weak self] in
+                guard let item = $0 else { return }
+                
+                self?.show(content: item.viewController())
+            }
+            .store(in: &cancellables)
+        
+        viewModel.$contentItems
+            .sink { [weak self] in
+                self?.contentControllers = $0.map { $0.viewController() }
+            }
+            .store(in: &cancellables)
     }
     
-    private var currentContentController: UIViewController?
     private func show(content contentController: UIViewController) {
         if pageController.viewControllers != [contentController] {
             pageController.setViewControllers([contentController], direction: .forward, animated: false, completion: nil)

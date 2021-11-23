@@ -25,14 +25,14 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQ5-Si-kFs" userLabel="Content Container">
-                                <rect key="frame" x="0.0" y="156" width="414" height="706"/>
+                                <rect key="frame" x="0.0" y="156" width="414" height="740"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="aQ5-Si-kFs" secondAttribute="bottom" id="3Zd-0X-Pub"/>
+                            <constraint firstAttribute="bottom" secondItem="aQ5-Si-kFs" secondAttribute="bottom" id="3Zd-0X-Pub"/>
                             <constraint firstItem="aQ5-Si-kFs" firstAttribute="top" secondItem="uuQ-8Z-FFD" secondAttribute="bottom" id="DLs-bP-keb"/>
                             <constraint firstItem="aQ5-Si-kFs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="MZc-oS-3eD"/>
                             <constraint firstItem="uuQ-8Z-FFD" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Oho-hH-hJF"/>

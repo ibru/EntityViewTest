@@ -17,6 +17,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+        
+        let rootViewController = window?.rootViewController as? EntityViewController
+        
+        let viewControllers: [UIViewController] = [
+            ContentViewController(title: "My Work Template", color: .gray),
+            ContentViewController(title: "Fields", color: .blue),
+            ContentViewController(title: "Attachments", color: .purple),
+            ContentViewController(title: "Subtasks", color: .magenta)
+        ]
+        
+        rootViewController?.viewModel = .init(contentItems: [
+            .init(title: "Work Template", viewController: { viewControllers[0] }),
+            .init(title: "Fields", viewController: { viewControllers[1] }),
+            .init(title: "Attachments", viewController: { viewControllers[2] }),
+            .init(title: "Subtasks", viewController: { viewControllers[3] })
+        ])
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
