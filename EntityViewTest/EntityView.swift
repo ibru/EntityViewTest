@@ -31,10 +31,12 @@ struct EntityView: View {
             TabView(selection: $viewModel.selectedItem) {
                 ForEach(viewModel.contentItems) { item in
                     item.view
+                        .ignoresSafeArea()
                         .tag(item)
                 }
             }
             .tabViewStyle(.page)
+            .ignoresSafeArea()
         }
     }
 }
