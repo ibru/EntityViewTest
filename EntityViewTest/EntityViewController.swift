@@ -21,7 +21,7 @@ class EntityViewController: UIViewController {
             itemViewModels: viewModel.contentItems.map { contentItem in
                     .init(
                         title: contentItem.title,
-                        isSelected: contentItem.id == viewModel.selectedItem?.id,
+                        isSelected: contentItem.id == viewModel.selectedItem.id,
                         selection: { self.viewModel.show(content: contentItem) }
                     )
             }
@@ -56,18 +56,17 @@ class EntityViewController: UIViewController {
         
         view.backgroundColor = .white
         
-        if let initialySelectedController = viewModel.selectedItem?.viewController {
-            pageController.setViewControllers([initialySelectedController()], direction: .forward, animated: false, completion: nil)
-        }
+        let initialySelectedController = viewModel.selectedItem.viewController
+        
+        pageController.setViewControllers([initialySelectedController()], direction: .forward, animated: false, completion: nil)
+        
 
         add(tabController, into: tabContainerView)
         add(pageController, into: contentContainerView)
         
         viewModel.$selectedItem
             .sink { [weak self] in
-                guard let item = $0 else { return }
-                
-                self?.show(content: item.viewController())
+                self?.show(content: $0.viewController())
             }
             .store(in: &cancellables)
         

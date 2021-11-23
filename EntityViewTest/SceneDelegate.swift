@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -18,8 +19,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
         
-        let rootViewController = window?.rootViewController as? EntityViewController
-        
         let viewControllers: [UIViewController] = [
             ContentViewController(title: "My Work Template", color: .gray),
             ContentViewController(title: "Fields", color: .blue),
@@ -27,12 +26,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             ContentViewController(title: "Subtasks", color: .magenta)
         ]
         
-        rootViewController?.viewModel = .init(contentItems: [
-            .init(title: "Work Template", viewController: { viewControllers[0] }),
+        let selectedItem = EntityViewModel.ContentItem(title: "Work Template", viewController: { viewControllers[0] })
+        let entityViewModel = EntityViewModel(contentItems: [
+            selectedItem,
             .init(title: "Fields", viewController: { viewControllers[1] }),
             .init(title: "Attachments", viewController: { viewControllers[2] }),
             .init(title: "Subtasks", viewController: { viewControllers[3] })
-        ])
+        ], selectedItem: selectedItem)
+        
+        // uncomment to show UIKit version
+        let rootViewController = window?.rootViewController as? EntityViewController
+        rootViewController?.viewModel = entityViewModel
+        
+        // uncomment to show SwiftUI version
+//        if #available(iOS 14.0, *) {
+//            window?.rootViewController = UIHostingController(
+//                rootView: EntityView(viewModel: entityViewModel)
+//            )
+//        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
