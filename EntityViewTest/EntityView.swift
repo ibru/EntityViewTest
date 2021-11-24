@@ -50,10 +50,18 @@ struct EntityView_Previews: PreviewProvider {
     static var previews: some View {
         let selectedItem = EntityViewModel.ContentItem(title: "Fields", viewController: { ContentViewController(title: "Fields", color: .blue) })
         
-        return EntityView(viewModel: .init(contentItems: [
+        return EntityView(viewModel: .init(contentPublisher: [
             .init(title: "Task", viewController: { ContentViewController(title: "My Work Template", color: .gray) }),
             selectedItem,
             .init(title: "Attachments", viewController: { ContentViewController(title: "Attachments", color: .purple) })
-        ], selectedItem: selectedItem))
+        ]))
+    }
+}
+
+import Combine
+extension Array: EntityViewContentPublishing where Element == EntityViewModel.ContentItem {
+    var contentPublisher: EntityViewContentPublishing.ContentPublisher {
+        Just(self)
+            .eraseToAnyPublisher()
     }
 }

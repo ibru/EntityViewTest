@@ -21,7 +21,13 @@ struct MenuItemViewModel {
 
 final class TabbedMenuViewModel: ObservableObject {
     
-    private let itemViewModels: [MenuItemViewModel]
+    var itemViewModels: [MenuItemViewModel] {
+        didSet {
+            items = itemViewModels.map {
+                .init(title: $0.title, isSelected: $0.isSelected)
+            }
+        }
+    }
     
     init(itemViewModels: [MenuItemViewModel]) {
         self.itemViewModels = itemViewModels

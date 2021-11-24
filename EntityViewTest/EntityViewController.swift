@@ -72,7 +72,16 @@ class EntityViewController: UIViewController {
         
         viewModel.$contentItems
             .sink { [weak self] in
-                self?.contentControllers = $0.map { $0.viewController() }
+                guard let self = self else { return }
+                
+                self.contentControllers = $0.map { $0.viewController() }
+                self.tabbedMenuViewModel.itemViewModels = $0.map { contentItem in
+                        .init(
+                            title: contentItem.title,
+                            isSelected: contentItem.id == self.viewModel.selectedItem.id,
+                            selection: { [weak self] in self?.viewModel.show(content: contentItem) }
+                        )
+                }
             }
             .store(in: &cancellables)
     }

@@ -6,6 +6,13 @@
 //
 
 import UIKit
+import Combine
+
+protocol EntityViewContentPublishing {
+    typealias ContentPublisher = AnyPublisher<[EntityViewModel.ContentItem], Never>
+    
+    var contentPublisher: ContentPublisher { get }
+}
 
 final class EntityViewModel: ObservableObject {
     struct ContentItem {
@@ -15,15 +22,25 @@ final class EntityViewModel: ObservableObject {
     
     @Published var contentItems: [ContentItem] = []
     
-    @Published var selectedItem: ContentItem
+    @Published var selectedItem: ContentItem = .empty
+        
+    private var cancellables: Set<AnyCancellable> = []
     
-    init(contentItems: [ContentItem], selectedItem: ContentItem) {
-        self.contentItems = contentItems
-        self.selectedItem = selectedItem
+    init(contentPublisher: EntityViewContentPublishing) {
+        contentPublisher.contentPublisher.sink { [weak self] in
+            self?.contentItems = $0
+            self?.selectedItem = $0.first ?? .empty
+        }.store(in: &cancellables)
     }
     
     func show(content: ContentItem) {
         selectedItem = content
+    }
+}
+
+extension EntityViewModel.ContentItem {
+    static var empty: Self {
+        .init(title: "_empty", viewController: { UIViewController() })
     }
 }
 

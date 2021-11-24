@@ -23,16 +23,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             ContentViewController(title: "My Work Template", color: .gray),
             ContentViewController(title: "Fields", color: .blue),
             ContentViewController(title: "Attachments", color: .purple),
-            ContentViewController(title: "Subtasks", color: .magenta)
+            ContentViewController(title: "Subtasks", color: .magenta),
+            ContentViewController(title: "Users", color: .yellow)
         ]
         
-        let selectedItem = EntityViewModel.ContentItem(title: "Work Template", viewController: { viewControllers[0] })
-        let entityViewModel = EntityViewModel(contentItems: [
-            selectedItem,
+        let publisher = ContentPublisher()
+        let entityViewModel = EntityViewModel(contentPublisher: publisher)
+        
+        publisher.subject.send([
+            .init(title: "Work Template", viewController: { viewControllers[0] }),
             .init(title: "Fields", viewController: { viewControllers[1] }),
             .init(title: "Attachments", viewController: { viewControllers[2] }),
             .init(title: "Subtasks", viewController: { viewControllers[3] })
-        ], selectedItem: selectedItem)
+        ])
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
+            publisher.subject.send([
+                .init(title: "Work Template", viewController: { viewControllers[0] }),
+                .init(title: "Users", viewController: { viewControllers[4] }),
+                .init(title: "Subtasks", viewController: { viewControllers[3] })
+            ])
+        }
         
         // uncomment to show UIKit version
         let rootViewController = window?.rootViewController as? EntityViewController
@@ -77,3 +88,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+import Combine
+
+struct ContentPublisher: EntityViewContentPublishing {
+    var subject = PassthroughSubject<[EntityViewModel.ContentItem], Never>()
+    
+    var contentPublisher: AnyPublisher<[EntityViewModel.ContentItem], Never> {
+        subject.eraseToAnyPublisher()
+    }
+}
